@@ -153,7 +153,7 @@ if cameraType == 'emCCD'
 else
     xsize = 512;
     ysize = 512;
-    film_length=(file_info.bytes)/xsize/ysize/2;
+    film_length=(file_info.bytes)/xsize/ysize;
     disp(film_length);
 end
 
@@ -215,8 +215,8 @@ if cameraType == "emCCD"
     end
 else
     for i=start_frame:film_length
-        one_frame = fread(fid_pma,[ysize,xsize], 'int16');
-        imagesc(one_frame')
+        one_frame = fread(fid_pma,[ysize,xsize], 'int6');
+        image(one_frame')
         colormap(hot);
         drawnow
         set(handles.edit3, 'String', sprintf("%d / %d",i, film_length))
